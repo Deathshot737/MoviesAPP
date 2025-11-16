@@ -11,15 +11,6 @@ export const MovieModal = ({ onCreated }: { onCreated?: () => void }) => {
     const { handleClose } = isOpencontext;
     const [submitting, setSubmitting] = useState(false);
 
-    // convertir el archivo de imagen en base64
-    const convertFileToBase64 = (file: File) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result as string);
-            reader.onerror = error => reject(error);
-        });
-    }
     const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
         if (submitting) return;
@@ -27,16 +18,13 @@ export const MovieModal = ({ onCreated }: { onCreated?: () => void }) => {
         try {
             const form = ev.currentTarget;
             const data = new FormData(form);
-            const posterFile = data.get('poster');
             const movie: movieInterface = {
                 Title: String(data.get('title') || ''),
                 Year: String(data.get('year') || ''),
                 Type: String(data.get('type') || ''),
-                Poster: ''
+                Poster: String(data.get('poster') || '')
             };
-            if (posterFile instanceof File && posterFile.size > 0) {
-                movie.Poster = await convertFileToBase64(posterFile) as string;
-            }
+
             await createMovie(movie);
             onCreated?.();
             handleClose();
@@ -69,7 +57,7 @@ export const MovieModal = ({ onCreated }: { onCreated?: () => void }) => {
                         </select>
 
                         <label htmlFor="poster">Poster</label>
-                        <input type="file" name="poster" id="poster" accept="image/*" required />
+                        <input type="url" name="poster" id="poster" accept="image/*" required />
 
                         <button type="submit" className="btn btn--primary btn--save" disabled={submitting}>
                             {submitting ? 'Guardando…' : 'Guardar'}

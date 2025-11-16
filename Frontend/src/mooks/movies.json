@@ -1,0 +1,74 @@
+{
+    "movies": [
+        {
+            "Title": "Marvel Studios: Expanding the Universe",
+            "Year": "2019",
+            "imdbID": "tt11295300",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BODk4YjIxYmMtYzIxYy00OTkzLTg4ZTEtZmVkOGVkZmE2ODE5XkEyXkFqcGc@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Marvel Rising: Chasing Ghosts",
+            "Year": "2019",
+            "imdbID": "tt9073748",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BYjQzNDJiMTgtODhiMi00NWJlLTllMjAtNTA3MzJmOWVmMDNiXkEyXkFqcGdeQXVyODQyNDI4ODg@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Lego Marvel Avengers: Mission Demolition",
+            "Year": "2024",
+            "imdbID": "tt33653255",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BODA0YWY0NmQtMTU2Yi00MjA4LTk3MTktNDcwZDljOTgyMTdkXkEyXkFqcGc@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Lego Marvel Spider-Man: Vexed by Venom",
+            "Year": "2019",
+            "imdbID": "tt10755644",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BYjNkZjA1NjQtZTY0Yi00OGM4LWIxOTUtMmY4MmFmZGJiNWQ1XkEyXkFqcGc@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Marvel: Ultimate Alliance 2",
+            "Year": "2009",
+            "imdbID": "tt1266580",
+            "Type": "game",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMmI2MTA1NmMtMzJiZS00NGQ1LTk2YTAtNDRkZTkyMjk3YzYyXkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Marvel Future Avengers",
+            "Year": "2017–2018",
+            "imdbID": "tt6591446",
+            "Type": "series",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BYWZjZDE5MjYtOTU5OS00NGQwLWJkMGYtZGVmNzM3NzM4NWUxXkEyXkFqcGc@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Marvel Rising: Operation Shuri",
+            "Year": "2019",
+            "imdbID": "tt11113964",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BZjNkNTJhNTktNzNkNi00MTk0LWIyNzUtNTMxMGQwMzM3NDhiXkEyXkFqcGdeQXVyMjY2OTU0MTg@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Marvel Rising: Battle of the Bands",
+            "Year": "2019",
+            "imdbID": "tt10863978",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BYzg4ZDI3ZGYtZjNlZC00ODMxLTkwNGItYjA1YTc1MzNmZjJiXkEyXkFqcGdeQXVyODc5MDgxNzE@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Marvel Anime",
+            "Year": "2010–2011",
+            "imdbID": "tt1945805",
+            "Type": "series",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMzM2M2M2MmItYjE3NS00YmNhLTkyZmItYzNkZWJiYzJmYjg0XkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Marvel Disk Wars: The Avengers",
+            "Year": "2014–2015",
+            "imdbID": "tt3644256",
+            "Type": "series",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BOTMwYmRkY2UtZmQ2NS00YzRiLWFjNzYtNzRjMWYxY2VmY2YyXkEyXkFqcGc@._V1_SX300.jpg"
+        }
+    ]
+}

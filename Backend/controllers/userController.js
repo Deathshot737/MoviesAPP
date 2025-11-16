@@ -1,4 +1,3 @@
-const { use } = require('bcrypt/promises');
 const auth = require('../middelware/auth');
 const User = require('../models/user');
 
@@ -12,9 +11,16 @@ const verifiyUser = async (username) => {
 }
 
 const getAllUsers = async (req, res) => {
-    // antes de mostrar los usuarios, debemos verificar si el token es valido
-    const users = await User.find();
-    res.json(users);
+    try {
+        const authHeader = req.headers.authorization || '';
+        const token = authHeader.startsWith('Bearer ') ? authHeader.substring(7) : null;
+        if (!token) return res.status(401).json({ message: 'Missing token' });
+        auth.verifyToken(token);
+        const users = await User.find().select('-password');
+        return res.json(users);
+    } catch (e) {
+        return res.status(401).json({ message: 'Invalid token' });
+    }
 }
 
 const getUserById = async (req, res) => {
@@ -25,29 +31,28 @@ const getUserById = async (req, res) => {
 const singup = async (req, res) => {
     const { username, password } = req.body;
     if (await verifiyUser(username) == false) {
-        res.status(401).json({ message: 'Bad Request' });
-        return;
+        return res.status(409).json({ message: 'Username already exists' });
     }
     const hashedPassword = await auth.generateHash(password);
-    console.log(hashedPassword);
     const user = new User({ username, password: hashedPassword, role: 1 });
     await user.save();
-    res.json({ message: 'User registered' });
+    return res.status(201).json({ message: 'User registered' });
 }
 const login = async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
-    console.log(user);
-    if (user == {}) {
-        res.status(401).json({ message: 'Invalid credentials' });
-        return;
+    if (!user) {
+        return res.status(401).json({ message: 'Invalid credentials' });
     }
     const isPasswordValid = await auth.compareHash(password, user.password);
     if (!isPasswordValid) {
-        res.status(401).json({ message: 'Invalid credentials' });
-        return;
+        return res.status(401).json({ message: 'Invalid credentials' });
     }
-    res.json(user)
+    const token = auth.generateToken({ id: user._id });
+    return res.json({
+        token,
+        user: { id: user._id, username: user.username, role: user.role }
+    });
 }
 
 const createUser = async (req, res) => {
@@ -61,7 +66,7 @@ const updateUser = async (req, res) => {
     res.json(user);
 }
 const deleteUser = async (req, res) => {
-    await user.findByIdAndDelete(req.params.id);
+    await User.findByIdAndDelete(req.params.id);
     res.json({ message: 'User deleted' });
 }
 

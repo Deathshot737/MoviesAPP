@@ -2,11 +2,13 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const generateToken = (user) => {
-    return //jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+    const secret = process.env.JWT_SECRET || 'dev-secret';
+    return jwt.sign({ id: user.id }, secret, { expiresIn: '1d' });
 }
 
 const verifyToken = (token) => {
-    return j//wt.verify(token, process.env.JWT_SECRET);
+    const secret = process.env.JWT_SECRET || 'dev-secret';
+    return jwt.verify(token, secret);
 }
 
 const generateHash = (password) => {

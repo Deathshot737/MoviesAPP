@@ -1,9 +1,12 @@
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
+import App from './App';
 import { IsOpenProvider } from './provaider/isOpenProvider';
+import { AuthProvider } from './context/authContext';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <IsOpenProvider>
-    <App />
-  </IsOpenProvider>
+  <AuthProvider>
+    <IsOpenProvider>
+      <App />
+    </IsOpenProvider>
+  </AuthProvider>
 );

@@ -15,7 +15,7 @@ const getMovieById = async (req, res) => {
 const createMovie = async (req, res) => {
     const movie = new Movie(req.body);
     await movie.save();
-    res.json(201, "Movie created");
+    res.status(201).json({ message: "Movie created" });
 }
 
 const updateMovie = async (req, res) => {

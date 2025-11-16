@@ -1,21 +1,59 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './App.css'
 import { MovieModal } from './components/MovieModal/MovieModal'
 import { isOpenContext } from './context/isOpenContext';
+import type { movieInterface } from './interfaces/movieInterface';
+import { getMovies } from './services/servicesMovies';
+import MovieCard from './components/MovieCard.tsx/MovieCard';
+import LoginModal from './components/LoginModal/LoginModal';
+import { useAuth } from './context/authContext';
 
 function App() {
+  const [movies, setMovies] = useState<movieInterface[]>([]);
+  const [showLogin, setShowLogin] = useState(false);
   const isOpencontext = useContext(isOpenContext);
   if (!isOpencontext) throw new Error('ToggleButton debe estar dentro de IsOpenProvider');
   const { isOpen, handleOpen } = isOpencontext;
   console.log(isOpen);
+  const { user, logout } = useAuth();
+
+  const fetchMovies = () => {
+    getMovies()
+      .then(setMovies)
+      .catch((err) => console.error('Error fetching movies', err));
+  };
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   return (
-    <>
-      <button onClick={() => handleOpen()}>Agregar pelicula</button>
-      {isOpen &&
-        <MovieModal />
-      }
-    </>
+    <main className="app">
+      <header className="app__header">
+        <h1 className="app__title">Movies</h1>
+        <div className="app__actions">
+          <button className="btn btn--primary" onClick={() => handleOpen()}>Agregar película</button>
+          {user ? (
+            <button className="btn" onClick={logout}>Salir ({user.username})</button>
+          ) : (
+            <button className="btn" onClick={() => setShowLogin(true)}>Iniciar sesión</button>
+          )}
+        </div>
+      </header>
+
+      <section className="meta">
+        <span className="muted">Películas cargadas: {movies.length}</span>
+      </section>
+
+      <section className="grid">
+        {movies.map((m) => (
+          <MovieCard key={m._id ?? m.Title} movie={m} />
+        ))}
+      </section>
+
+      {isOpen && <MovieModal onCreated={fetchMovies} />}
+      {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
+    </main>
   )
 }
 

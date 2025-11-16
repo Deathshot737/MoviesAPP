@@ -8,6 +8,14 @@ const app = express();
 app.use(express.json());
 app.use(express.json({ limit: "1000mb" }));
 app.use(express.urlencoded({ extended: true, limit: "1000mb" }));
+// CORS básico para permitir peticiones desde el frontend (vite en 5173)
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    if (req.method === 'OPTIONS') return res.sendStatus(200);
+    next();
+});
 // Tus rutas aquí
 app.use('/api/v1', movieRouter);
 app.use('/api/v1', userRouter);

@@ -50,6 +50,16 @@
   gap: 8px;
 }
 
+.card__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn--sm { padding: 6px 10px; border-radius: 8px; }
+.btn--danger { border-color: #5b3133; background: #2a1011; color: #fca5a5; }
+.btn--danger:hover { border-color: #7f1d1d; }
+
 .chip {
   border: 1px solid #374151;
   color: #93c5fd;

@@ -1,7 +1,8 @@
 import type { movieCardProps } from './movieCardInterface';
 import './movieCard.css';
 
-export default function MovieCard({ movie }: movieCardProps) {
+export default function MovieCard({ movie, onEdit, onDelete }: movieCardProps) {
+	const id = movie._id ?? '';
 	return (
 		<article className="card">
 			<div className="card__image-wrap">
@@ -16,6 +17,10 @@ export default function MovieCard({ movie }: movieCardProps) {
 				<div className="card__meta">
 					<span className="chip">{movie.Type}</span>
 					<span className="muted">{movie.Year}</span>
+				</div>
+				<div className="card__actions">
+					<button className="btn btn--sm" onClick={() => onEdit?.(movie)}>Editar</button>
+					<button className="btn btn--sm btn--danger" onClick={() => id && onDelete?.(id)}>Eliminar</button>
 				</div>
 			</div>
 		</article>

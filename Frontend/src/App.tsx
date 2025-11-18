@@ -6,7 +6,7 @@ import type { movieInterface } from './interfaces/movieInterface';
 import { getMovies, deleteMovie } from './services/servicesMovies';
 import MovieCard from './components/MovieCard.tsx/MovieCard';
 import LoginModal from './components/LoginModal/LoginModal';
-import { useAuth } from './context/authContext';
+
 
 function App() {
   const [movies, setMovies] = useState<movieInterface[]>([]);
@@ -16,7 +16,7 @@ function App() {
   if (!isOpencontext) throw new Error('ToggleButton debe estar dentro de IsOpenProvider');
   const { isOpen, handleOpen } = isOpencontext;
   console.log(isOpen);
-  const { user, logout } = useAuth();
+ 
 
   const fetchMovies = () => {
     getMovies()
@@ -34,11 +34,7 @@ function App() {
         <h1 className="app__title">Movies</h1>
         <div className="app__actions">
           <button className="btn btn--primary" onClick={() => handleOpen()}>Agregar película</button>
-          {user ? (
-            <button className="btn" onClick={logout}>Salir ({user.username})</button>
-          ) : (
-            <button className="btn" onClick={() => setShowLogin(true)}>Iniciar sesión</button>
-          )}
+        
         </div>
       </header>
 
